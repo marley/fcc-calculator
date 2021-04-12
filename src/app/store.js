@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import operationsReducer from "../features/counter/operations";
+import operationsReducer from "../features/calculator/operations";
 
 export const store = configureStore({
   reducer: {
