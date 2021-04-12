@@ -1,13 +1,8 @@
-import { createStore } from "redux";
-// import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
 import operationsReducer from "../features/counter/operations";
 
-// export const store = configureStore({
-//   reducer: {
-//     counter: counterReducer,
-//   },
-// });
-
-const store = createStore(operationsReducer);
-
-export default store;
+export const store = configureStore({
+  reducer: {
+    operator: operationsReducer,
+  },
+});

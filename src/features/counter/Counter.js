@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  decrement,
-  increment,
+  add,
+  subtract,
   incrementByAmount,
-  incrementIfOdd,
-  selectCount,
-} from "./counterSlice";
+  // multiply,
+  // divide,
+  selectTotal,
+} from "./operations";
 import styles from "./Counter.module.css";
 
 export function Counter() {
-  const count = useSelector(selectCount);
+  const count = useSelector(selectTotal);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState("2");
 
@@ -19,23 +20,14 @@ export function Counter() {
   return (
     <div>
       <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
         <span className={styles.value}>{count}</span>
         <button
           className={styles.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
+          aria-label="Add value"
+          onClick={() => dispatch(add(5))}
         >
           +
         </button>
-      </div>
-      <div className={styles.row}>
         <input
           className={styles.textbox}
           aria-label="Set increment amount"
@@ -47,12 +39,6 @@ export function Counter() {
           onClick={() => dispatch(incrementByAmount(incrementValue))}
         >
           Add Amount
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add If Odd
         </button>
       </div>
     </div>
