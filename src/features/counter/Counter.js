@@ -13,9 +13,9 @@ import styles from "./Counter.module.css";
 export function Counter() {
   const count = useSelector(selectTotal);
   const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState("2");
+  const [operatorAmount, setOperatorAmount] = useState("0");
 
-  const incrementValue = Number(incrementAmount) || 0;
+  const operatorValue = Number(operatorAmount) || 0;
 
   return (
     <div>
@@ -31,12 +31,12 @@ export function Counter() {
         <input
           className={styles.textbox}
           aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
+          value={operatorAmount}
+          onChange={(e) => setOperatorAmount(e.target.value)}
         />
         <button
           className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
+          onClick={() => dispatch(add(operatorValue))}
         >
           Add Amount
         </button>
