@@ -11,7 +11,6 @@ import { getInput } from "../redux/selectors";
 const Display = ({ input }) => <div className="display">{input}</div>;
 
 const mapStateToProps = (state) => {
-  console.log(state);
   const input = getInput(state);
   return { input };
 };
