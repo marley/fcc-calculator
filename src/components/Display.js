@@ -12,7 +12,7 @@ const Display = ({ input }) => <div className="display">{input}</div>;
 
 const mapStateToProps = (state) => {
   console.log(state);
-  const input = state.getInput();
+  const input = getInput(state);
   return { input };
 };
 
