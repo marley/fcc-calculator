@@ -17,10 +17,10 @@ export const pressOperator = (operator) => ({
 
 export const pressEquals = () => ({
   type: PRESS_EQUALS,
-  payload: "=", // TODO this will have to be unset at some point
+  payload: "=",
 });
 
 export const pressClear = () => ({
   type: PRESS_CLEAR,
-  payload: "C", // TODO this will have to be unset at some point
+  payload: "C",
 });
