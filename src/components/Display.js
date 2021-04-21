@@ -1,8 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import cx from "classnames";
-import { toggleTodo } from "../redux/actions";
+// import {
+//   pressNum,
+//   pressOperator,
+//   pressEquals,
+//   pressClear,
+// } from "../redux/actions";
+import { getInput } from "../redux/selectors";
 
-export function Display(props) {
-  return <div id="display">{props.input}</div>;
-}
+const Display = ({ input }) => <div className="display">{input}</div>;
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  const input = state.getInput();
+  return { input };
+};
+
+export default connect(mapStateToProps)(Display);

@@ -9,9 +9,10 @@ function App() {
   return (
     <div className="App">
       <Display />
-      <AddTodo />
+      {/* <Buttons /> */}
+      {/* <AddTodo />
       <TodoList />
-      <VisibilityFilters />
+      <VisibilityFilters /> */}
     </div>
   );
 }
