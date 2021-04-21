@@ -6,17 +6,20 @@ import {
 } from "../actionTypes";
 
 const calculatorReducer = (state = "", action) => {
+  console.log("REDUCER:");
   switch (action.type) {
     case PRESS_NUM: {
       // TODO let's just see if this works for now
       let input = "";
-      if (action.payload === 0) {
+      let num = parseInt(action.payload);
+      if (num === 0) {
         if (state !== "0") {
-          input = `${state}${action.payload}`;
+          input = `${state}${num}`;
         }
       } else {
-        input = `${state}${action.payload}`;
+        input = `${state}${num}`;
       }
+      console.log(`input: ${input}`);
       return input;
     }
     case PRESS_OPERATOR: {

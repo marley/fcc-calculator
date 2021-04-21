@@ -1,1 +1,1 @@
-export const getInput = (store) => store.input;
+export const getInput = (store) => store;

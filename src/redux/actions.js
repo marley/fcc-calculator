@@ -7,20 +7,20 @@ import {
 
 export const pressNum = (num) => ({
   type: PRESS_NUM,
-  payload: { num },
+  payload: num,
 });
 
 export const pressOperator = (operator) => ({
   type: PRESS_OPERATOR,
-  payload: { operator },
+  payload: operator,
 });
 
 export const pressEquals = () => ({
   type: PRESS_EQUALS,
-  payload: { submit: true }, // TODO this will have to be unset at some point
+  payload: "=", // TODO this will have to be unset at some point
 });
 
 export const pressClear = () => ({
   type: PRESS_CLEAR,
-  payload: { clear: true }, // TODO this will have to be unset at some point
+  payload: "C", // TODO this will have to be unset at some point
 });
