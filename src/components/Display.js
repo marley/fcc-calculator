@@ -8,7 +8,7 @@ import { connect } from "react-redux";
 // } from "../redux/actions";
 import { getInput } from "../redux/selectors";
 
-const Display = ({ input }) => <div className="display">{input}</div>;
+const Display = ({ input }) => <div id="display">{input}</div>;
 
 const mapStateToProps = (state) => {
   const input = getInput(state);

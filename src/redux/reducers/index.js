@@ -30,31 +30,42 @@ const setFirstOperator = (exp) => {
   }
 };
 
-const calculatorReducer = (state = "", action) => {
+const calculatorReducer = (state = "0", action) => {
   console.log("REDUCER:");
   switch (action.type) {
     case PRESS_NUM: {
-      // TODO let's just see if this works for now
-      let input = "";
+      let input = "0";
       let num = parseInt(action.payload);
-      if (num === 0) {
-        if (state !== "0") {
-          input = `${state}${num}`;
-        }
-      } else {
+      if (state !== "0") {
         input = `${state}${num}`;
+      } else {
+        if (num === 0) {
+          // do nothing
+          input = state;
+        } else {
+          // replace state
+          input = `${num}`; // replace 0 with new number
+        }
       }
       console.log(`input: ${input}`);
       return input;
     }
     case PRESS_OPERATOR: {
       // TODO let's just see if this works for now
+      console.log("Operators" + action.payload);
       let input = "";
+      let operator = action.payload;
       let numbersOnly = /[0-9]/;
-      if (state !== "0" || numbersOnly.test(state[state.length - 1])) {
-        input = `${state}${action.payload}`;
-      } else if (action.payload === "-") {
-        input = `${action.payload}`;
+      if (state !== "0") {
+        console.log("1");
+        input = `${state}${operator}`;
+      } else if (operator === "-") {
+        console.log("A special case");
+        input = `${operator}`;
+      } else if (numbersOnly.test(state[state.length - 1])) {
+        console.log(state[state.length - 1] + "is a number");
+        console.log("2");
+        input = `${state}${operator}`;
       }
       return input;
     }

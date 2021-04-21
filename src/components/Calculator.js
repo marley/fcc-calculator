@@ -27,25 +27,40 @@ class Calculator extends React.Component {
   };
 
   render() {
-    return (
-      <div>
-        <button value={5} onClick={(e) => this.handleClick(e, "value")}>
-          5
+    let buttonData = [
+      { name: "zero", value: 0 },
+      { name: "one", value: 1 },
+      { name: "two", value: 2 },
+      { name: "three", value: 3 },
+      { name: "four", value: 4 },
+      { name: "five", value: 5 },
+      { name: "six", value: 6 },
+      { name: "seven", value: 7 },
+      { name: "eight", value: 8 },
+      { name: "nine", value: 9 },
+      { name: "decimal", value: "." },
+      { name: "add", value: "+" },
+      { name: "subtract", value: "-" },
+      { name: "multiply", value: "*" },
+      { name: "divide", value: "/" },
+      { name: "clear", value: "C" },
+      { name: "equals", value: "=" },
+    ];
+    let buttons = [];
+    for (let i = 0; i < buttonData.length; i++) {
+      buttons.push(
+        <button
+          key={i}
+          id={buttonData[i]["name"]}
+          value={buttonData[i]["value"]}
+          onClick={(e) => this.handleClick(e, "value")}
+        >
+          {buttonData[i]["value"]}
         </button>
-        <button value={"+"} onClick={(e) => this.handleClick(e, "value")}>
-          +
-        </button>
-        <button value={"-"} onClick={(e) => this.handleClick(e, "value")}>
-          -
-        </button>
-        <button value={"="} onClick={(e) => this.handleClick(e, "value")}>
-          =
-        </button>
-        <button value={"C"} onClick={(e) => this.handleClick(e, "value")}>
-          C
-        </button>
-      </div>
-    );
+      );
+    }
+    console.log(buttons);
+    return <div>{buttons}</div>;
   }
 }
 
