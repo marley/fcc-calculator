@@ -5,6 +5,31 @@ import {
   PRESS_CLEAR,
 } from "../actionTypes";
 
+const evaluate = (num, operator, total) => {
+  // params: int/float, string, int/float
+  switch (operator) {
+    case "+":
+      return total + num;
+    case "-":
+      return total - num;
+    case "*":
+      return total * num;
+    case "/":
+      return total / num;
+    default:
+      return "ERROR :(";
+  }
+};
+
+const setFirstOperator = (exp) => {
+  if (exp[0] === "-") {
+    // if first num is negative, we start iteration at 1
+    return { operator: "-", i: 1 };
+  } else {
+    return { operator: "+", i: 0 };
+  }
+};
+
 const calculatorReducer = (state = "", action) => {
   console.log("REDUCER:");
   switch (action.type) {
@@ -34,13 +59,41 @@ const calculatorReducer = (state = "", action) => {
       return input;
     }
     case PRESS_EQUALS: {
-      // TODO do a thing
-      let input = "(equals)";
-      return input;
+      // TODO all this assumes that user has correctly enter numbers, no 0/0 or ** etc
+      console.log("EQUALS:");
+      let input = "";
+      // let numRx = /[0-9]+(.[0-9]+)?/;
+      let numRx = /[0-9.]/;
+      let { i, operator } = setFirstOperator(state);
+      let currentNum = "";
+      let total = 0;
+      while (i < state.length) {
+        if (numRx.test(state[i]) && i < state.length - 1) {
+          let digitOrDecimal = state[i];
+          currentNum += digitOrDecimal;
+        } else {
+          /* if we reach operator or end of expression, then
+          evaluate exp so far */
+          if (numRx.test(state[i])) {
+            let digitOrDecimal = state[i];
+            currentNum += digitOrDecimal;
+          }
+          console.log(
+            `reached ${state[i]} time to evaluate ${operator} and ${currentNum}`
+          );
+          let num = parseInt(currentNum); // TODO make this work for floats
+          total = evaluate(num, operator, total);
+          if (i < state.length - 1) {
+            operator = state[i];
+            currentNum = "";
+          }
+        }
+        i++;
+      }
+      return input + total;
     }
     case PRESS_CLEAR: {
-      // TODO do a thing
-      let input = "";
+      let input = "0";
       return input;
     }
     default: {
