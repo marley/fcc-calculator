@@ -4,18 +4,21 @@ import {
   PRESS_EQUALS,
   PRESS_CLEAR,
 } from "../actionTypes";
+import MathNum from "../helpers/math";
 
 const evaluate = (num, operator, total) => {
   // params: int/float, string, int/float
+  let mathNum = new MathNum(`${num}`);
+  let mathTotal = new MathNum(`${total}`);
   switch (operator) {
     case "+":
-      return total + num;
+      return mathTotal.add(mathNum);
     case "-":
-      return total - num;
+      return mathTotal.subtract(mathNum);
     case "*":
-      return total * num;
+      return mathTotal.multiply(mathNum);
     case "/":
-      return total / num;
+      return mathTotal.divide(mathNum);
     default:
       return "ERROR :(";
   }

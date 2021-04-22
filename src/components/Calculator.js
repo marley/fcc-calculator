@@ -14,7 +14,6 @@ class Calculator extends React.Component {
   }
   handleClick = (event) => {
     let val = event.target.value;
-    console.log(event.target.value);
     if (/[0-9]/.test(val)) {
       this.props.pressNum(val);
     } else if (/[+*/-]/.test(val)) {
