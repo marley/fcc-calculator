@@ -83,16 +83,13 @@ const calculatorReducer = (state = "0", action) => {
       let currentNum = "";
       let total = 0;
       while (i < state.length) {
-        if (numRx.test(state[i]) && i < state.length - 1) {
+        if (numRx.test(state[i])) {
           let digitOrDecimal = state[i];
           currentNum += digitOrDecimal;
-        } else {
+        }
+        if (numRx.test(state[i]) === false || i === state.length - 1) {
           /* if we reach operator or end of expression, then
           evaluate exp so far */
-          if (numRx.test(state[i])) {
-            let digitOrDecimal = state[i];
-            currentNum += digitOrDecimal;
-          }
           console.log(
             `reached ${state[i]} time to evaluate ${operator} and ${currentNum}`
           );
