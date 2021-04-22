@@ -37,17 +37,18 @@ const calculatorReducer = (state = "0", action) => {
   console.log("REDUCER:");
   switch (action.type) {
     case PRESS_NUM: {
+      console.log("NUM", action.payload);
       let input = "0";
-      let num = parseInt(action.payload);
+      let num = action.payload;
       if (state !== "0") {
         input = `${state}${num}`;
       } else {
-        if (num === 0) {
+        if (num === "0") {
           // do nothing
           input = state;
         } else {
           // replace state
-          input = `${num}`; // replace 0 with new number
+          input = num; // replace 0 with new number
         }
       }
       console.log(`input: ${input}`);
@@ -55,10 +56,10 @@ const calculatorReducer = (state = "0", action) => {
     }
     case PRESS_OPERATOR: {
       // TODO let's just see if this works for now
-      console.log("Operators" + action.payload);
+      console.log("OPERATOR" + action.payload);
       let input = "";
       let operator = action.payload;
-      let numbersOnly = /[0-9]/;
+      let numbersOnly = /[0-9.]/;
       if (state !== "0") {
         console.log("1");
         input = `${state}${operator}`;
@@ -107,10 +108,12 @@ const calculatorReducer = (state = "0", action) => {
       return input + total;
     }
     case PRESS_CLEAR: {
+      console.log("CLEAR");
       let input = "0";
       return input;
     }
     default: {
+      console.log("DEFAULT");
       return state;
     }
   }
