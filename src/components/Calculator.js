@@ -58,7 +58,6 @@ class Calculator extends React.Component {
         </button>
       );
     }
-    console.log(buttons);
     return <div>{buttons}</div>;
   }
 }

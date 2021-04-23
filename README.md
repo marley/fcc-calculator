@@ -10,5 +10,4 @@ The following are things I learned over the course of creating this app.
 
 # Todo
 
-- [ ] Make it so that multiple operators in a row defaults to last operator (except for negative)
 - [ ] Add styling

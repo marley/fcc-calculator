@@ -15,7 +15,6 @@ const initialState = {
 
 const evaluate = (num, operator, total) => {
   // params: int/float, string, int/float
-  console.log({ num, operator, total });
   let mathNum = new MathNum(`${num}`);
   let mathTotal = new MathNum(`${total}`);
   switch (operator) {
@@ -35,14 +34,17 @@ const evaluate = (num, operator, total) => {
 const updateTotal = (state, payload, nextNumNegative) => {
   /* if we reach operator or end of expression, then
   evaluate exp so far */
-  console.log("Update total:", state.lastOperator);
   let currentNum = state.currentNum;
   let total = state.total;
   if (currentNum.length > 0 && currentNum !== "-") {
     total = evaluate(currentNum, state.lastOperator, state.total);
     currentNum = "";
-  } else if (nextNumNegative) {
-    currentNum = "-";
+  } else {
+    if (nextNumNegative) {
+      currentNum = "-";
+    } else {
+      currentNum = "";
+    }
   }
   let lastOperator = payload; // update to next operator
 
@@ -50,14 +52,11 @@ const updateTotal = (state, payload, nextNumNegative) => {
 };
 
 const calculatorReducer = (state = initialState, action) => {
-  console.log("============REDUCER:============");
-  console.log(state);
   switch (action.type) {
     case PRESS_NUM: {
       let payload = action.payload;
       let input = state.input;
       let currentNum = state.currentNum;
-      console.log(payload);
       if (payload === ".") {
         if (currentNum.indexOf(".") < 0) {
           // if no other decimal points, then can append
@@ -80,7 +79,6 @@ const calculatorReducer = (state = initialState, action) => {
       return { ...state, input, currentNum };
     }
     case PRESS_OPERATOR: {
-      console.log("OPERATOR" + action.payload);
       let payload = action.payload;
       let input = state.input;
       let numbersOnly = /[0-9.]/;
@@ -89,15 +87,22 @@ const calculatorReducer = (state = initialState, action) => {
         // append operator after any number
         input = `${input}${payload}`;
       } else {
-        // 1 + 2 +-6/
         if (payload === "-") {
+          // it's okay to add - after another operator
           input = `${input}${payload}`;
           nextNumNegative = true;
-          console.log(nextNumNegative);
           payload = state.lastOperator;
         } else {
           // default to last operator entered with new operator
-          input = `${input.slice(0, input.length - 1)}${payload}`;
+          if (
+            input[input.length - 1] === "-" &&
+            input[input.length - 1] !== state.lastOperator
+          ) {
+            // e.g. '5*-' < as you can see the lastOperator is *, but the last thing entered was a '-'
+            input = `${input.slice(0, input.length - 2)}${payload}`;
+          } else {
+            input = `${input.slice(0, input.length - 1)}${payload}`;
+          }
         }
       }
       let { total, lastOperator, currentNum } = updateTotal(
@@ -109,7 +114,6 @@ const calculatorReducer = (state = initialState, action) => {
     }
     case PRESS_EQUALS: {
       // TODO all this assumes that user has correctly enter numbers, no 0/0 or ** etc
-      console.log("EQUALS:");
       // updateTotal
       let { total, lastOperator, currentNum } = updateTotal(state, "+");
       // set input to total
@@ -124,7 +128,6 @@ const calculatorReducer = (state = initialState, action) => {
       };
     }
     default: {
-      console.log("DEFAULT");
       return state;
     }
   }
