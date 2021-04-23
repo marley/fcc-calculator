@@ -56,13 +56,7 @@ export default function MathNum(strValue) {
   this.multiply = function (otherNum) {
     let multiplier = this.requiredDecimalPlace(otherNum);
     let result = this.mathValue(multiplier) * otherNum.mathValue(multiplier);
-    /* After multiplying 2 decimals, you have to count the decimal places to
-    know how many decimal places to give the result.  But this changes if one of
-    the numbers is not a decimal, so we check that here:*/
-    if (this.decimalIndex() >= 0 && otherNum.decimalIndex() >= 0) {
-      return result / 10 ** (multiplier * 2);
-    }
-    return result / 10 ** multiplier;
+    return result / 10 ** (multiplier * 2);
   };
 
   this.divide = function (otherNum) {
@@ -82,16 +76,16 @@ export default function MathNum(strValue) {
 // console.log("Result should be 11.48");
 // console.log(a.multiply(b));
 // console.log("Result should be 12.75");
-// let c = new MathNum("0.05");
-// let d = new MathNum("0.4");
+// let c = new MathNum("5");
+// let d = new MathNum("5.5");
 // console.log(c.multiply(d));
-// console.log("Result should be 0.02");
+// console.log("Result should be 27.5");
 // let e = new MathNum("2");
 // let f = new MathNum("4");
 // console.log(a.divide(e));
 // console.log("Result should be 6.25");
 // console.log(a.divide(c));
-// console.log("Result should be 250");
+// console.log("Result should be 2.5");
 // console.log(e.add(f));
 // console.log("Should be 6");
 // let g = new MathNum("0");
