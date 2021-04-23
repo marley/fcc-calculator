@@ -6,6 +6,13 @@ import {
 } from "../actionTypes";
 import MathNum from "../helpers/math";
 
+const initialState = {
+  input: "0",
+  total: 0,
+  currentNum: "0",
+  lastOperator: "+",
+};
+
 const evaluate = (num, operator, total) => {
   // params: int/float, string, int/float
   let mathNum = new MathNum(`${num}`);
@@ -24,90 +31,82 @@ const evaluate = (num, operator, total) => {
   }
 };
 
-const setFirstOperator = (exp) => {
-  if (exp[0] === "-") {
-    // if first num is negative, we start iteration at 1
-    return { operator: "-", i: 1 };
-  } else {
-    return { operator: "+", i: 0 };
-  }
+// const updateCurrentNum = (state, payload) => {
+//   /* As you press number keys, update */
+//   let currentNum = `${state.currentNum}${payload}`;
+//   let input = `${state.input}${payload}`;
+//   return { currentNum };
+// };
+
+const updateTotal = (state, payload) => {
+  /* if we reach operator or end of expression, then
+  evaluate exp so far */
+  let total = evaluate(state.currentNum, state.lastOperator, state.total);
+  let lastOperator = payload; // update to next operator
+  let currentNum = "";
+  return { total, lastOperator, currentNum };
 };
 
-const calculatorReducer = (state = "0", action) => {
+const calculatorReducer = (state = initialState, action) => {
   console.log("REDUCER:");
   switch (action.type) {
     case PRESS_NUM: {
       console.log("NUM", action.payload);
-      let input = "0";
-      let num = action.payload;
-      if (state !== "0") {
-        input = `${state}${num}`;
+      let payload = action.payload;
+      let input = state.input;
+      let currentNum = state.currentNum;
+      if (input !== "0") {
+        input = `${state.input}${payload}`;
+        currentNum = `${state.currentNum}${payload}`;
       } else {
-        if (num === "0") {
+        if (payload === "0") {
           // do nothing
-          input = state;
+          // input = state.input;
         } else {
           // replace state
-          input = num; // replace 0 with new number
+          input = payload; // replace 0 with new number
+          currentNum = payload;
         }
       }
-      console.log(`input: ${input}`);
-      return input;
+      return { ...state, input, currentNum };
     }
     case PRESS_OPERATOR: {
-      // TODO let's just see if this works for now
       console.log("OPERATOR" + action.payload);
-      let input = "";
-      let operator = action.payload;
+      let payload = action.payload;
+      let input = state.input;
       let numbersOnly = /[0-9.]/;
-      if (state !== "0") {
-        console.log("1");
-        input = `${state}${operator}`;
-      } else if (operator === "-") {
-        console.log("A special case");
-        input = `${operator}`;
-      } else if (numbersOnly.test(state[state.length - 1])) {
-        console.log(state[state.length - 1] + "is a number");
-        console.log("2");
-        input = `${state}${operator}`;
+      if (numbersOnly.test(input[input.length - 1])) {
+        // append operator after any number
+        input = `${input}${payload}`;
+      } else {
+        if (payload === "-" && input[input.length - 1] === "-") {
+          // change two minu to plus
+          input = `${input.slice(0, input.length - 1)}+`;
+          payload = "+";
+        } else {
+          // default to last operator entered with new operator
+          input = `${input.slice(0, input.length - 1)}${payload}`;
+        }
       }
-      return input;
+      let { total, lastOperator, currentNum } = updateTotal(state, payload);
+      return { ...state, input, total, currentNum, lastOperator };
     }
     case PRESS_EQUALS: {
       // TODO all this assumes that user has correctly enter numbers, no 0/0 or ** etc
       console.log("EQUALS:");
-      let input = "";
-      // let numRx = /[0-9]+(.[0-9]+)?/;
-      let numRx = /[0-9.]/;
-      let { i, operator } = setFirstOperator(state);
-      let currentNum = "";
-      let total = 0;
-      while (i < state.length) {
-        if (numRx.test(state[i])) {
-          let digitOrDecimal = state[i];
-          currentNum += digitOrDecimal;
-        }
-        if (numRx.test(state[i]) === false || i === state.length - 1) {
-          /* if we reach operator or end of expression, then
-          evaluate exp so far */
-          console.log(
-            `reached ${state[i]} time to evaluate ${operator} and ${currentNum}`
-          );
-          let num = parseInt(currentNum); // TODO make this work for floats
-          total = evaluate(num, operator, total);
-          if (i < state.length - 1) {
-            operator = state[i];
-            currentNum = "";
-          }
-        }
-        i++;
-      }
-      return input + total;
+      // updateTotal
+      let { total, lastOperator, currentNum } = updateTotal(state, "+");
+      // set input to total
+      return { ...state, input: total, total, currentNum, lastOperator };
     }
     case PRESS_CLEAR: {
-      console.log("CLEAR");
-      let input = "0";
-      return input;
+      return {
+        ...state,
+        input: "0",
+        total: 0,
+        currentNum: "0",
+        lastOperator: "+",
+      };
     }
     default: {
       console.log("DEFAULT");
