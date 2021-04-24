@@ -7,18 +7,21 @@ This project was created as one of my final projects for the FreeCodeCamp [Front
 ![Screen Shot 2021-04-24 at 1 38 01 AM](https://user-images.githubusercontent.com/29967154/115948709-bd703400-a49d-11eb-8d9d-afa5a4ded302.png)
 
 # To Run
+
 1.  Run `yarn start`
 2.  Calculate!
 
 ### Running tests
+
 1.  Click the hamburger menu in the upper left corner
 2.  Select "Javascript Calculator" from the dropdown menu
 3.  Click "Run Tests"
 
 # Todo
 
-- [ ] Add mobile breakpoint styling
-- [ ] Clear display if user starts entering new number after equals (instead of appending to old number)
+(Not required by FCC)
+
+- [x] Clear display if user starts entering new number after equals (instead of appending to old number)
 - [ ] Add handling for long inputs so display scrolls instead of stretching
 
 # Links
