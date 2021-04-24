@@ -23,9 +23,12 @@ This project was created as one of my final projects for the FreeCodeCamp [Front
 
 - [x] Clear display if user starts entering new number after equals (instead of appending to old number)
 - [x] Add handling for long inputs so display doesn't stretch
+- [ ] Add handling for long calculation results so display doesn't stretch
 
 # Links
 
 The following are things I learned over the course of creating this app.
 
 - [Simple redux example](https://codesandbox.io/s/9on71rvnyo?file=/src/components/AddTodo.js:0-774)
+- [Updating redux state](https://linguinecode.com/post/understanding-redux-reducers)
+- [mapStateToProps and mapDispatchToProps with mulitple props](https://react-redux.js.org/api/connect)
