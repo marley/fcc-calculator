@@ -10,4 +10,6 @@ The following are things I learned over the course of creating this app.
 
 # Todo
 
-- [ ] Add styling
+- [ ] Add mobile breakpoint styling
+- [ ] Clear display if user starts entering new number after equals (instead of appending to old number)
+- [ ] Add handling for long inputs so display scrolls instead of stretching

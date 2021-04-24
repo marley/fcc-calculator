@@ -1,39 +1,66 @@
+#main {
+  height: 100vh;
+}
 .App {
-  text-align: center;
+  display: grid;
+  grid-gap: 20px 15px;
+  /* grid-template-columns: repeat(3, 1fr); */
+  width: 300px;
+  height: 350px;
+  background: #005ba5;
+  border-radius: 5%;
+  padding: 30px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#display {
+  background: var(--bs-light);
+  font-size: 26px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
+#calculator-div {
+  display: grid;
+  grid-gap: 2%;
+  grid-template-columns: 10px, 1fr;
+  grid-template-areas:
+    "clear clear clear ."
+    ". . . ."
+    ". . . ."
+    ". . . ."
+    ". . equals equals";
 }
 
-.App-header {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.btn {
+  font-weight: 700;
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+#equals {
+  /* background-color: var(--secondary); */
+  color: var(--bs-light);
+  grid-area: equals;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+#zero,
+#one,
+#two,
+#three,
+#four,
+#five,
+#six,
+#seven,
+#eight,
+#nine,
+#decimal {
+  /* background-color: var(--info); */
+}
+
+#clear {
+  /* background-color: var(--warning); */
+  grid-area: clear;
+}
+#add,
+#subtract,
+#multiply,
+#divide {
+  /* background-color: var(--dark); */
+  color: var(--bs-light);
 }

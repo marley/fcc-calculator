@@ -27,23 +27,23 @@ class Calculator extends React.Component {
 
   render() {
     let buttonData = [
-      { name: "zero", value: 0 },
-      { name: "one", value: 1 },
-      { name: "two", value: 2 },
-      { name: "three", value: 3 },
-      { name: "four", value: 4 },
-      { name: "five", value: 5 },
-      { name: "six", value: 6 },
-      { name: "seven", value: 7 },
-      { name: "eight", value: 8 },
-      { name: "nine", value: 9 },
-      { name: "decimal", value: "." },
-      { name: "add", value: "+" },
-      { name: "subtract", value: "-" },
-      { name: "multiply", value: "*" },
-      { name: "divide", value: "/" },
-      { name: "clear", value: "C" },
-      { name: "equals", value: "=" },
+      { name: "clear", value: "C", buttonType: "btn-warning" },
+      { name: "divide", value: "/", buttonType: "btn-primary" },
+      { name: "nine", value: 9, buttonType: "btn-info" },
+      { name: "eight", value: 8, buttonType: "btn-info" },
+      { name: "seven", value: 7, buttonType: "btn-info" },
+      { name: "multiply", value: "*", buttonType: "btn-primary" },
+      { name: "six", value: 6, buttonType: "btn-info" },
+      { name: "five", value: 5, buttonType: "btn-info" },
+      { name: "four", value: 4, buttonType: "btn-info" },
+      { name: "subtract", value: "-", buttonType: "btn-primary" },
+      { name: "three", value: 3, buttonType: "btn-info" },
+      { name: "two", value: 2, buttonType: "btn-info" },
+      { name: "one", value: 1, buttonType: "btn-info" },
+      { name: "add", value: "+", buttonType: "btn-primary" },
+      { name: "zero", value: 0, buttonType: "btn-info" },
+      { name: "decimal", value: ".", buttonType: "btn-info" },
+      { name: "equals", value: "=", buttonType: "btn-success" },
     ];
     let buttons = [];
     for (let i = 0; i < buttonData.length; i++) {
@@ -51,6 +51,7 @@ class Calculator extends React.Component {
         <button
           key={i}
           id={buttonData[i]["name"]}
+          className={`btn ${buttonData[i]["buttonType"]}`}
           value={buttonData[i]["value"]}
           onClick={(e) => this.handleClick(e, "value")}
         >
@@ -58,7 +59,7 @@ class Calculator extends React.Component {
         </button>
       );
     }
-    return <div>{buttons}</div>;
+    return <div id="calculator-div">{buttons}</div>;
   }
 }
 
