@@ -6,7 +6,7 @@ This project was created as one of the final projects for the FreeCodeCamp [Fron
 
 The following are things I learned over the course of creating this app.
 
-- [Simple redux example](https://codesandbox.io/s/9on71rvnyo?file=/src/components/AddTodo.js:0-774);
+- [Simple redux example](https://codesandbox.io/s/9on71rvnyo?file=/src/components/AddTodo.js:0-774)
 
 # Todo
 
