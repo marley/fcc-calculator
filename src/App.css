@@ -4,7 +4,6 @@
 .App {
   display: grid;
   grid-gap: 20px 15px;
-  /* grid-template-columns: repeat(3, 1fr); */
   width: 300px;
   height: 350px;
   background: #005ba5;
@@ -35,33 +34,16 @@
 }
 
 #equals {
-  /* background-color: var(--secondary); */
   color: var(--bs-light);
   grid-area: equals;
 }
 
-#zero,
-#one,
-#two,
-#three,
-#four,
-#five,
-#six,
-#seven,
-#eight,
-#nine,
-#decimal {
-  /* background-color: var(--info); */
-}
-
 #clear {
-  /* background-color: var(--warning); */
   grid-area: clear;
 }
 #add,
 #subtract,
 #multiply,
 #divide {
-  /* background-color: var(--dark); */
   color: var(--bs-light);
 }

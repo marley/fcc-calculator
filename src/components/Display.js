@@ -1,11 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-// import {
-//   pressNum,
-//   pressOperator,
-//   pressEquals,
-//   pressClear,
-// } from "../redux/actions";
 import { getInput } from "../redux/selectors";
 
 const Display = ({ input }) => (

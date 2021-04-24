@@ -65,7 +65,6 @@ class Calculator extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // dispatching plain actions
     pressNum: (num) => dispatch(pressNum(num)),
     pressOperator: (operator) => dispatch(pressOperator(operator)),
     pressEquals: () => dispatch(pressEquals()),
