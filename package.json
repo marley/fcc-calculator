@@ -2,7 +2,7 @@
   "name": "fcc-calculator",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://marley.github.io/fcc-calculator/",
+  "homepage": "https://marley.github.io/fcc-calculator/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",
