@@ -22,7 +22,7 @@ This project was created as one of my final projects for the FreeCodeCamp [Front
 (Not required by FCC)
 
 - [x] Clear display if user starts entering new number after equals (instead of appending to old number)
-- [ ] Add handling for long inputs so display scrolls instead of stretching
+- [x] Add handling for long inputs so display doesn't stretch
 
 # Links
 

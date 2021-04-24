@@ -12,6 +12,7 @@ const initialState = {
   currentNum: "0",
   lastOperator: "+",
   didSubmit: false,
+  showErrorMsg: false,
 };
 
 const evaluate = (num, operator, total) => {
@@ -60,12 +61,20 @@ const updateTotal = ({
   return { total, currentNum, lastOperator, didSubmit };
 };
 
+const inputTooLong = (input) => {
+  return input.length === 12;
+};
+
 const calculatorReducer = (state = initialState, action) => {
   switch (action.type) {
     case PRESS_NUM: {
       let payload = action.payload;
       let input = state.input;
       let currentNum = state.currentNum;
+      if (inputTooLong(state.input)) {
+        state.showErrorMsg = true;
+        return { ...state };
+      }
       if (state.didSubmit) {
         // inputting new number after '=', clear slate
         input = payload;
@@ -103,6 +112,10 @@ const calculatorReducer = (state = initialState, action) => {
       let input = state.input;
       let numbersOnly = /[0-9.]/;
       let nextNumNegative = false;
+      if (inputTooLong(state.input)) {
+        state.showErrorMsg = true;
+        return { ...state };
+      }
       if (state.didSubmit) {
         // if user enters operator right after equals
         input = `${input}${payload}`;
@@ -158,6 +171,7 @@ const calculatorReducer = (state = initialState, action) => {
         currentNum,
         lastOperator,
         didSubmit,
+        showErrorMsg: false,
       };
     }
     case PRESS_CLEAR: {
@@ -167,6 +181,7 @@ const calculatorReducer = (state = initialState, action) => {
         currentNum: "0",
         lastOperator: "+",
         didSubmit: false,
+        showErrorMsg: false,
       };
     }
     default: {

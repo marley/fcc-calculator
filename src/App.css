@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 #main {
   height: 100vh;
 }
@@ -13,7 +14,8 @@
 
 #display {
   background: var(--bs-light);
-  font-size: 26px;
+  font-size: 18px;
+  font-family: "Press Start 2P", cursive;
   padding: 5px;
 }
 
