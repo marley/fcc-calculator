@@ -33,28 +33,16 @@ const evaluate = (num, operator, total) => {
 };
 
 const updateTotal = ({
-  state, // currentNum: 2, didSubmit: true, input: "2", lastOperator: "+", total: 2
-  payload, // -
-  nextNumNegative = false, // false
-  submitting = false, // false
+  state,
+  payload,
+  nextNumNegative = false,
+  submitting = false,
 }) => {
-  /* if we reach operator or end of expression, then
-  evaluate exp so far */
-  /*
-  what needs to happen:
-  - if just evaluating interim value:
-    > update total
-    > set currentNum to "" or "-" if there nextNumNegative
-  - if submitting:
-    > update total
-    > set currentNum to state.total
-  whatever the case, update last operator to be payload
-  */
-  let currentNum = state.currentNum; // 2
-  let total = state.total; //2
+  let currentNum = state.currentNum;
+  let total = state.total;
   let didSubmit = false;
-  if (currentNum !== "-") {
-    total = evaluate(currentNum, state.lastOperator, state.total); // 2, + , 2
+  if (currentNum.length > 0 && currentNum !== "-") {
+    total = evaluate(currentNum, state.lastOperator, state.total);
   }
   if (submitting) {
     currentNum = total;
@@ -67,33 +55,18 @@ const updateTotal = ({
       currentNum = "";
     }
   }
-  // let currentNum = state.currentNum;
-  // let total = state.total;
-  // if (currentNum.length > 0 && currentNum !== "-") {
-  //   total = evaluate(currentNum, state.lastOperator, state.total);
-  //   currentNum = "";
-  // } else {
-  //   if (nextNumNegative) {
-  //     currentNum = "-";
-  //   } else {
-  //     currentNum = "";
-  //   }
-  // }
   let lastOperator = payload; // update to next operator
 
   return { total, currentNum, lastOperator, didSubmit };
 };
 
 const calculatorReducer = (state = initialState, action) => {
-  console.log(state);
   switch (action.type) {
     case PRESS_NUM: {
       let payload = action.payload;
       let input = state.input;
       let currentNum = state.currentNum;
-      console.log(state.didSubmit);
       if (state.didSubmit) {
-        console.log("DID SUMBIT");
         // inputting new number after '=', clear slate
         input = payload;
         currentNum = payload;
@@ -118,11 +91,7 @@ const calculatorReducer = (state = initialState, action) => {
         input = `${state.input}${payload}`;
         currentNum = `${state.currentNum}${payload}`;
       } else {
-        if (payload === "0") {
-          // do nothing
-          // input = state.input;
-        } else {
-          // replace state
+        if (payload !== "0") {
           input = payload; // replace 0 with new number
           currentNum = payload;
         }
@@ -130,13 +99,12 @@ const calculatorReducer = (state = initialState, action) => {
       return { ...state, input, currentNum };
     }
     case PRESS_OPERATOR: {
-      let payload = action.payload; //-
-      let input = state.input; //2
+      let payload = action.payload;
+      let input = state.input;
       let numbersOnly = /[0-9.]/;
       let nextNumNegative = false;
       if (state.didSubmit) {
-        // if user entering operator right after equals
-        console.log("hi there");
+        // if user enters operator right after equals
         input = `${input}${payload}`;
         let currentNum = "0";
         return {
@@ -148,11 +116,9 @@ const calculatorReducer = (state = initialState, action) => {
         };
       }
       if (numbersOnly.test(input[input.length - 1])) {
-        //true
         // append operator after any number
         input = `${input}${payload}`; // 2-
       } else {
-        //
         if (payload === "-") {
           // it's okay to add '-' after another operator
           input = `${input}${payload}`;
@@ -170,7 +136,7 @@ const calculatorReducer = (state = initialState, action) => {
             input = `${input.slice(0, input.length - 1)}${payload}`;
           }
         }
-      } //state, - ,  false
+      }
       let { total, currentNum, lastOperator, didSubmit } = updateTotal({
         state,
         payload,
@@ -179,8 +145,6 @@ const calculatorReducer = (state = initialState, action) => {
       return { ...state, input, total, currentNum, lastOperator, didSubmit };
     }
     case PRESS_EQUALS: {
-      // TODO all this assumes that user has correctly enter numbers, no 0/0 or ** etc
-      // updateTotal
       let { total, lastOperator, currentNum, didSubmit } = updateTotal({
         state,
         payload: "+",
