@@ -4,7 +4,7 @@ This project was created as one of my final projects for the FreeCodeCamp [Front
 
 **>>> [Try it out!](https://marley.github.io/fcc-calculator/)**
 
-![Screen Shot 2021-04-24 at 1 38 01 AM](https://user-images.githubusercontent.com/29967154/115948709-bd703400-a49d-11eb-8d9d-afa5a4ded302.png)
+![Screen Shot 2021-04-24 at 1 19 31 PM](https://user-images.githubusercontent.com/29967154/115967278-c4c82980-a4ff-11eb-9754-4daf67a02f11.png)
 
 # To Run
 
@@ -23,9 +23,12 @@ This project was created as one of my final projects for the FreeCodeCamp [Front
 
 - [x] Clear display if user starts entering new number after equals (instead of appending to old number)
 - [x] Add handling for long inputs so display doesn't stretch
+- [ ] Add handling for long calculation results so display doesn't stretch
 
 # Links
 
 The following are things I learned over the course of creating this app.
 
 - [Simple redux example](https://codesandbox.io/s/9on71rvnyo?file=/src/components/AddTodo.js:0-774)
+- [Updating redux state](https://linguinecode.com/post/understanding-redux-reducers)
+- [mapStateToProps and mapDispatchToProps with mulitple props](https://react-redux.js.org/api/connect)
