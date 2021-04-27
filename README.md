@@ -2,7 +2,7 @@
 
 This project was created as one of my final projects for the FreeCodeCamp [Frontend Frameworks certification](https://www.freecodecamp.org/learn/front-end-libraries/). It was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-**>>> [Try it out!](https://marley.github.io/fcc-calculator/)**
+**>> [Try it out!](https://marley.github.io/fcc-calculator/)**
 
 ![Screen Shot 2021-04-24 at 1 19 31 PM](https://user-images.githubusercontent.com/29967154/115967278-c4c82980-a4ff-11eb-9754-4daf67a02f11.png)
 
