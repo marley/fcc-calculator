@@ -62,7 +62,8 @@ const updateTotal = ({
 };
 
 const inputTooLong = (input) => {
-  return input.length === 12;
+  console.log(`Length of ${input} == ${input.length}`);
+  return input.length >= 12;
 };
 
 const calculatorReducer = (state = initialState, action) => {
@@ -163,10 +164,12 @@ const calculatorReducer = (state = initialState, action) => {
         payload: "+",
         submitting: true,
       });
-      // set input to total
+      let displayTotal = inputTooLong(`${total}`)
+        ? `${total}`.slice(0, 12)
+        : `${total}`;
       return {
         ...state,
-        input: `${total}`,
+        input: displayTotal,
         total,
         currentNum,
         lastOperator,
